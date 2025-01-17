@@ -1,0 +1,11 @@
+{
+    "/detect": {
+      "target": "https://face-2snbrq2o3a-ue.a.run.app",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/detect": "/detect"
+      }
+    }
+  }
+  

@@ -1,0 +1,18 @@
+<div class="container mt-4" *ngIf="history && history.length">
+  <h3>History</h3>
+  <div class="d-flex flex-wrap">
+    <div
+      *ngFor="let item of history; let i = index"
+      class="m-2"
+      (click)="restoreHistory(i)"
+      style="cursor: pointer;"
+    >
+      <img
+        [src]="item.image"
+        class="img-thumbnail"
+        alt="Thumbnail"
+        style="width: 100px; height: 100px; object-fit: cover;"
+      />
+    </div>
+  </div>
+</div>

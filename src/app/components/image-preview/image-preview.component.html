@@ -1,0 +1,10 @@
+<div class="container mt-4" *ngIf="image">
+    <h3>Detection Results</h3>
+    <div class="text-center">
+      <img [src]="image" class="img-fluid" alt="Detected Image" style="max-width: 100%; height: auto;" />
+    </div>
+    <div *ngIf="detectionResults" class="text-center mt-3">
+      <p>Age: {{ detectionResults.age }}, Gender: {{ detectionResults.gender }}</p>
+    </div>
+  </div>
+  
