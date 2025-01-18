@@ -1,18 +1,24 @@
-<div class="container mt-4" *ngIf="history && history.length">
-  <h3>History</h3>
-  <div class="d-flex flex-wrap">
-    <div
-      *ngFor="let item of history; let i = index"
-      class="m-2"
-      (click)="restoreHistory(i)"
-      style="cursor: pointer;"
-    >
-      <img
-        [src]="item.image"
-        class="img-thumbnail"
-        alt="Thumbnail"
-        style="width: 100px; height: 100px; object-fit: cover;"
-      />
+<div *ngIf="error$ | async as error" class="alert alert-danger mt-3">{{ error }}</div>
+
+  <div class="container mt-4" *ngIf="history$ | async as history; else noHistory">
+    <div *ngIf="history.length > 0">
+      <h3>History:</h3>
+      <div class="d-flex flex-wrap">
+        <div *ngFor="let item of history; let i = index" class="m-2" (click)="restoreHistory(i)" style="cursor: pointer;">
+          <img
+            [src]="item.image"
+            class="img-thumbnail"
+            alt="Thumbnail"
+            style="width: 100px; height: 100px; object-fit: cover;"
+          />
+        </div>      
+      </div>
     </div>
   </div>
-</div>
+
+<ng-template #noHistory>
+  <div class="alert alert-info mt-3">
+    No history available.
+  </div>
+</ng-template>
+

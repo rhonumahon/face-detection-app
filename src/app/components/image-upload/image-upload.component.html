@@ -1,8 +1,23 @@
 <div class="container mt-4">
-    <h2>Face Detection App</h2>
-    <input type="file" (change)="onFileSelected($event)" class="form-control mb-3" />
-    <button (click)="uploadImage()" class="btn btn-primary" [disabled]="!selectedImage">
-      Detect Face
-    </button>
-    <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+  <h2 class="text-center mb-4">Face Detection App</h2>
+
+  <div class="row mx-4">
+    <div class="col-12 col-md-10">
+      <input type="file" (change)="onFileSelected($event)" class="form-control" />
+    </div>
+
+    <div class="col-12 col-md-2 d-flex justify-content-center align-items-center mt-3 mt-md-0">
+      <button 
+        (click)="uploadImage()" 
+        class="btn btn-primary" 
+        [disabled]="!selectedImage"
+      >
+        Detect Face
+      </button>
+    </div>
   </div>
+
+  <div *ngIf="error$ | async as error" class="alert alert-danger mt-3">
+    {{ error }}
+  </div>
+</div>

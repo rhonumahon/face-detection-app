@@ -1,26 +1,53 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { HttpClient } from '@angular/common/http';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { of } from 'rxjs';
+import { catchError, map, mergeMap, switchMap } from 'rxjs';
 import * as SearchActions from './search.actions';
+import { SearchService } from 'src/app/services/search.service';
 
 @Injectable()
 export class SearchEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(private actions$: Actions, private searchService: SearchService) {}
 
   detectFace$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SearchActions.uploadImage),
-      mergeMap(({ image }) =>
-        this.http.post('/detect', { sourceUrl: image }).pipe(
-          map((response: any) => SearchActions.detectFaceSuccess({ detectionResults: response })),
-          catchError((error) =>
-            of(SearchActions.detectFaceFailure({ error: 'Face detection failed.' }))
-          )
-        )
-      )
+      mergeMap(({ image, isHistoryRestore }) => {
+        if (isHistoryRestore) {
+          return of(SearchActions.detectFaceSuccess({ detectionResults: null }));
+        }
+
+        return this.searchService.detectFace(image).pipe(
+          map((response: any) => {
+            return SearchActions.detectFaceSuccess({ detectionResults: response });
+          }),
+          catchError((error) => this.handleError(error))
+        );
+      })
     )
   );
-  
-  
+
+  private handleError(error: any) {
+    let errorMessage = 'An error occurred while detecting the face. Please try again later.';
+
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      switch (error.status) {
+        case 404:
+          errorMessage = 'The API endpoint was not found.';
+          break;
+        case 500:
+          errorMessage = 'Server error, please try again later.';
+          break;
+        case 400:
+          errorMessage = 'Invalid request parameters.';
+          break;
+        default:
+          errorMessage = `Unexpected error: ${error.statusText}`;
+      }
+    }
+
+    return of(SearchActions.detectFaceFailure({ error: errorMessage }));
+  }
 }

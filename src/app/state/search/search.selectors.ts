@@ -1,12 +1,17 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { SearchState } from './search.state';
 
-// Assuming your state structure looks something like this
-export const selectSearchState = (state: any) => state.search;
+export const selectSearchState = createFeatureSelector<AppState, SearchState>('search');
 
-export const selectImageData = createSelector(
+export const selectImage = createSelector(
   selectSearchState,
-  (searchState: any) => {
-  console.log('searchState :', searchState);
-    return searchState.selectedImage
-  } // Adjust according to your actual state structure
+  (state: SearchState) => state.image
 );
+
+export const selectDetectionResults = createSelector(
+  selectSearchState,
+  (state: SearchState) => state.detectionResults
+);
+
+export const selectIsLoading = (state: AppState) => state.search.isLoading;
