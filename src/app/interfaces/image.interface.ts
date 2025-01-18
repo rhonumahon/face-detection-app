@@ -13,3 +13,7 @@ export interface IDetectionResult {
   ageLow: number;
   gender: string;
 }
+
+export interface IResults {
+  results: IDetectionResult[]
+}

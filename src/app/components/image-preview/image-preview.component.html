@@ -13,7 +13,7 @@
     <canvas #canvas style="position: absolute; top: 0; left: 0; pointer-events: none;"></canvas>
   </div>
 
-  <div *ngIf="detectionResults$ | async as detectionResults; else noResults" class="text-center mt-3">
+  <div *ngIf="detectionResults$ | async as detectionResults" class="text-center mt-3">
     <p>Age: {{ detectionResults.age }}, Gender: {{ detectionResults.gender }}</p>
   </div>
 
@@ -21,10 +21,6 @@
     <div class="loading-spinner">
       <div class="spinner"></div>
     </div>
-  </ng-template>
-
-  <ng-template #noResults>
-    <p>No faces detected. Please try another image.</p>
   </ng-template>
 </div>
 

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as SearchActions from './search.actions';
 import { SearchService } from 'src/app/services/search.service';
+import { IResults } from 'src/app/interfaces/image.interface';
 
 @Injectable()
 export class SearchEffects {
@@ -18,7 +19,11 @@ export class SearchEffects {
         }
 
         return this.searchService.detectFace(image).pipe(
-          map((response: any) => {
+          map((response: IResults) => {
+            if (response?.results?.length > 1) {
+              const errorMessage = `Multiple faces detected (${response.results.length}). Please upload an image with only one face.`;
+              return SearchActions.detectFaceFailure({ error: errorMessage });
+            }
             return SearchActions.detectFaceSuccess({ detectionResults: response });
           }),
           catchError((error) => this.handleError(error))
