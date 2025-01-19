@@ -76,11 +76,11 @@ export class ImagePreviewComponent implements AfterViewInit, OnDestroy {
     const aspectRatio = imgElement.naturalWidth / imgElement.naturalHeight;
 
     if (aspectRatio > 1) {
-      this.imageStyle = { width: '500px', height: 'auto' };
+      this.imageStyle = { width: '100%', height: 'auto' };
     } else if (aspectRatio < 1) {
-      this.imageStyle = { width: 'auto', height: '500px' };
+      this.imageStyle = { width: 'auto', height: '100%' };
     } else {
-      this.imageStyle = { width: '500px', height: '500px' };
+      this.imageStyle = { width: '100%', height: '100%' };
     }
   }
 
