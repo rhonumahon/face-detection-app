@@ -3,7 +3,7 @@
 <div class="container" *ngIf="history$ | async as history; else noHistory">
   <div *ngIf="history.length > 0">
     <hr class="text-white"/>
-    <h3 class="ml-4 text-white mb-4">History:</h3>
+    <h5 class="ml-4 text-white mb-2">History:</h5>
     <div class="d-flex flex-wrap">
       <div *ngFor="let item of history; let i = index" class="m-2" (click)="restoreHistory(i)" style="cursor: pointer;">
         <img

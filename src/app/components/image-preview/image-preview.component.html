@@ -1,6 +1,5 @@
 <div class="container" *ngIf="image$ | async as image; else videoPlaceholder">
-  <hr />
-  <h3 class="mb-3 text-white">Scan Results</h3>
+  <h4 class="text-white mb-2">Scan Results</h4>
 
   <div class="text-center" style="position: relative; display: inline-block;">
     <div class="image-wrapper">
@@ -25,7 +24,7 @@
 
   <div
     *ngIf="detectionResults$ | async as detectionResults"
-    class="details text-center align-items-center mt-3 glow-effect"
+    class="details text-center align-items-center mt-2 glow-effect"
   >
     <p class="parameters text-white">
       Age: <b>{{ detectionResults.age }}</b>, Gender: <b>{{ detectionResults.gender | titlecase }}</b>
@@ -35,12 +34,12 @@
 
 <ng-template #videoPlaceholder>
   <div class="container">
-    <h3 class="text-white mb-4">Scan and Discover!</h3>
+    <h4 class="text-white mb-2">Scan and Discover!</h4>
+    <h6 class="text-white m-4">Unlock insights about a person with a simple scan! Our app allows you to upload a photo, and in seconds, it provides valuable information such as age and gender. Try scanning now to get started!</h6>
     <video autoplay loop muted class="video-placeholder mb-4">
       <source src="assets/images/demovideo.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
-    <h5 class="text-white m-4">Unlock insights about a person with a simple scan! Our app allows you to upload a photo, and in seconds, it provides valuable information such as age and gender. Try scanning now to get started!</h5>
   </div>
 </ng-template>
 

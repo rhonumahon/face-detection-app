@@ -1,13 +1,13 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row mx-4">
-    <div class="col-12 col-md-10 input-group-lg">
-      <input type="file" (change)="onFileSelected($event)" class="form-control" aria-describedby="inputGroup-sizing-lg"/>
+    <div class="col-12 col-md-10">
+      <input type="file" (change)="onFileSelected($event)" class="form-control"/>
     </div>
 
     <div class="col-12 col-md-2 d-flex justify-content-center align-items-center mt-3 mt-md-0">
       <button 
         (click)="uploadImage()" 
-        class="btn btn-outline-light btn-lg" 
+        class="btn btn-outline-light" 
         [disabled]="!selectedImage"
       >
         Scan Face
