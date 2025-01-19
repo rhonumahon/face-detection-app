@@ -1,0 +1,9 @@
+.img-thumbnail {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .img-thumbnail:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px 5px rgba(0, 255, 0, 0.7);
+  }
+  

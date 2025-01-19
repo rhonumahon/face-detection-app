@@ -6,25 +6,75 @@
 img {
   display: block;
   margin: 0 auto;
-  width: 100%;
   max-width: 500px;
-  min-width: 500px; 
+  min-width: 500px;
   height: auto;
-  max-height: 500px; 
-  object-fit: contain; 
+  max-height: 500px;
+  object-fit: contain;
+  width: 500px;
+  height: 500px;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 15px rgb(189, 189, 189);
+  margin: 0 auto;
 }
 
 @media (max-width: 500px) {
   img {
     max-width: 100%;
     min-width: unset;
-    max-height: 100%; 
+    max-height: 100%;
   }
 }
+
 
 img.loading {
   opacity: 0.5;
 }
+
+.glow-effect {
+  animation: glow-in 1.5s ease-in-out;
+}
+
+@keyframes glow-in {
+  0% {
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00;
+    transform: scale(0.9);
+  }
+  50% {
+    text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 50px #00ff00;
+    transform: scale(1);
+  }
+  100% {
+    text-shadow: 0 0 10px #00ff00, 0 0 15px #00ff00, 0 0 25px #00ff00, 0 0 30px #00ff00;
+  }
+}
+
+.parameters {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 0;
+}
+
+.video-placeholder {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: cover;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 15px rgb(189, 189, 189);
+  margin: 0 auto;
+  background-color: #000;
+}
+
+@media (max-width: 600px) {
+  .video-placeholder {
+    max-width: 100%;
+    min-width: unset;
+    height: auto;
+  }
+}
+
 
 .loading-overlay {
   position: absolute;
@@ -42,9 +92,15 @@ img.loading {
   top: 0;
   left: 0;
   width: 100%;
-  height: 2px;
-  background-color: #3498db;
-  animation: scan 2s linear infinite;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    #00ff00 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  animation: scan 1s linear infinite; 
 }
 
 @keyframes scan {
@@ -56,30 +112,5 @@ img.loading {
   }
   100% {
     top: 120%;
-  }
-}
-
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-}
-
-.spinner {
-  border: 4px solid rgba(255, 255, 255, 0.3); 
-  border-top: 4px solid #3498db; 
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite; 
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
   }
 }

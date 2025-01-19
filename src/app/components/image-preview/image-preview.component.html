@@ -1,28 +1,48 @@
-<div class="container mt-4" *ngIf="image$ | async as image">
-  <h3>Detection Results</h3>
+<div class="container" *ngIf="image$ | async as image; else videoPlaceholder">
+  <hr />
+  <h3 class="mb-3 text-white">Scan Results</h3>
 
   <div class="text-center" style="position: relative; display: inline-block;">
     <div class="image-wrapper">
-      <img #imageElement [src]="image" class="img-fluid" alt="Detected Image" [class.loading]="isLoading$ | async" />
+      <img
+        #imageElement
+        [src]="image"
+        class="img-fluid"
+        alt="Detected Image"
+        [class.loading]="isLoading$ | async"
+      />
     </div>
 
     <div *ngIf="isLoading$ | async" class="loading-overlay">
       <div class="scanner-line"></div>
     </div>
 
-    <canvas #canvas style="position: absolute; top: 0; left: 0; pointer-events: none;"></canvas>
+    <canvas
+      #canvas
+      style="position: absolute; top: 0; left: 0; pointer-events: none;"
+    ></canvas>
   </div>
 
-  <div *ngIf="detectionResults$ | async as detectionResults" class="text-center mt-3">
-    <p>Age: {{ detectionResults.age }}, Gender: {{ detectionResults.gender }}</p>
+  <div
+    *ngIf="detectionResults$ | async as detectionResults"
+    class="details text-center align-items-center mt-3 glow-effect"
+  >
+    <p class="parameters text-white">
+      Age: <b>{{ detectionResults.age }}</b>, Gender: <b>{{ detectionResults.gender | titlecase }}</b>
+    </p>
   </div>
-
-  <ng-template #loadingTemplate>
-    <div class="loading-spinner">
-      <div class="spinner"></div>
-    </div>
-  </ng-template>
 </div>
+
+<ng-template #videoPlaceholder>
+  <div class="container">
+    <h3 class="text-white mb-4">Scan and Discover!</h3>
+    <video autoplay loop muted class="video-placeholder mb-4">
+      <source src="assets/images/demovideo.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <h5 class="text-white m-4">Unlock insights about a person with a simple scan! Our app allows you to upload a photo, and in seconds, it provides valuable information such as age and gender. Try scanning now to get started!</h5>
+  </div>
+</ng-template>
 
 <div *ngIf="errorMessage" class="error-message text-danger">
   <p>{{ errorMessage }}</p>

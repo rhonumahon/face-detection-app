@@ -101,34 +101,34 @@ export class ImagePreviewComponent implements AfterViewInit, OnDestroy {
     if (!this.imageElement || !this.canvasElement || !detectionResults?.rectangle) {
       return;
     }
-
+  
     try {
       const image = this.imageElement.nativeElement;
       const canvas = this.canvasElement.nativeElement;
       const context = canvas.getContext('2d')!;
-
+  
       context.clearRect(0, 0, canvas.width, canvas.height);
-
+  
       const rectangle = detectionResults.rectangle;
       const imageWidth = image.naturalWidth;
       const imageHeight = image.naturalHeight;
       const displayedWidth = image.width;
       const displayedHeight = image.height;
-
+  
       const xScale = displayedWidth / imageWidth;
       const yScale = displayedHeight / imageHeight;
-
+  
       const scaledLeft = rectangle.left * xScale;
       const scaledTop = rectangle.top * yScale;
       const scaledWidth = (rectangle.right - rectangle.left) * xScale;
       const scaledHeight = (rectangle.bottom - rectangle.top) * yScale;
-
+  
       canvas.width = displayedWidth;
       canvas.height = displayedHeight;
-
+  
       context.beginPath();
-      context.lineWidth = 2;
-      context.strokeStyle = 'red';
+      context.lineWidth = 5; 
+      context.strokeStyle = 'green'; 
       context.rect(scaledLeft, scaledTop, scaledWidth, scaledHeight);
       context.stroke();
     } catch (error) {
@@ -136,6 +136,7 @@ export class ImagePreviewComponent implements AfterViewInit, OnDestroy {
       console.error('Error updating canvas:', error);
     }
   }
+  
 
   private handleError(message: string): void {
     this.errorMessage = message;
