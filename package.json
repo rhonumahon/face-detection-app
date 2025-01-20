@@ -1,14 +1,13 @@
 {
   "name": "face-detection-app",
   "version": "0.0.0",
-  "postinstall": "npm run heroku-postbuild",
-  "heroku-postbuild": "ng build --prod",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "heroku-postbuild": "ng build --configuration production"
   },
   "private": true,
   "dependencies": {
