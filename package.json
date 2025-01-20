@@ -1,6 +1,8 @@
 {
   "name": "face-detection-app",
   "version": "0.0.0",
+  "postinstall": "npm run heroku-postbuild",
+  "heroku-postbuild": "ng build --prod",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
@@ -22,8 +24,12 @@
     "@ngrx/entity": "^13.2.0",
     "@ngrx/store": "^13.2.0",
     "@ngrx/store-devtools": "^13.2.0",
+    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
+    "http-proxy-middleware": "^3.0.3",
+    "morgan": "^1.10.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "uuid": "^8.3.2",
