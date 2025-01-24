@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as SearchActions from 'src/app/state/search/search.actions';
+import { selectError, selectHistory } from 'src/app/state/search/search.selectors';
 import { SearchState } from 'src/app/state/search/search.state';
 
 @Component({
@@ -10,10 +11,8 @@ import { SearchState } from 'src/app/state/search/search.state';
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent {
-  history$: Observable<{ image: string; detectionResults: any; id: string }[]> = this.store.select(
-    (state) => state.search.history
-  );
-  error$: Observable<string | null> = this.store.select((state) => state.search.error);
+  history$: Observable<{ image: string; detectionResults: any; id: string }[]> = this.store.select(selectHistory);
+  error$: Observable<string | null> = this.store.select(selectError);
 
   constructor(private store: Store<{ search: SearchState }>) {}
 

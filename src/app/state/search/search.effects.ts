@@ -13,10 +13,10 @@ export class SearchEffects {
   detectFace$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SearchActions.uploadImage),
-      mergeMap(({ image, isHistoryRestore }) => {
-        if (isHistoryRestore) {
-          return of(SearchActions.detectFaceSuccess({ detectionResults: null }));
-        }
+      mergeMap(({ image }) => {
+        // if (isHistoryRestore) {
+        //   return of(SearchActions.detectFaceSuccess({ detectionResults: null }));
+        // }
 
         return this.searchService.detectFace(image).pipe(
           map((response: IResults) => {

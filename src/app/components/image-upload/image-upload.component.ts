@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { uploadImage } from 'src/app/state/search/search.actions';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
+import { selectError } from 'src/app/state/search/search.selectors';
 
 @Component({
   selector: 'app-image-upload',
@@ -14,7 +15,7 @@ export class ImageUploadComponent {
   error$: Observable<string | null>;
 
   constructor(private store: Store<AppState>) {
-    this.error$ = this.store.select(state => state.search.error);
+    this.error$ = this.store.select(selectError);
   }
 
   onFileSelected(event: any): void {

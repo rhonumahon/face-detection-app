@@ -14,4 +14,14 @@ export const selectDetectionResults = createSelector(
   (state: SearchState) => state.detectionResults
 );
 
+export const selectHistory = createSelector(
+  selectSearchState,
+  (state: SearchState) => state.history
+);
+
+export const selectError = createSelector(
+  selectSearchState,
+  (state: SearchState) => state.error
+);
+
 export const selectIsLoading = (state: AppState) => state.search.isLoading;
